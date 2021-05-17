@@ -21,7 +21,7 @@ const Logo = styled.span`
 
 const ShareButton = styled.button`
   color: ${colorBlack};
-  padding: 8px 15px;
+  padding: 6px 15px;
   background: transparent;
   border: 2px solid ${colorBlue};
   border-radius: 5px;
