@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-const colorBlue = '#0080FD';
-const colorBlack = '#222429';
+// style
+import Colors from '../../style/Colors';
+
+// store
+import { MdContext } from '../../store/MdStore';
 
 const HeaderWrap = styled.div`
   display: flex;
@@ -12,6 +15,7 @@ const HeaderWrap = styled.div`
   height: 50px;
   border-bottom: 1px solid #bfbfbf;
   padding: 0 20px;
+  margin-bottom: 100px;
 `;
 
 const Logo = styled.span`
@@ -20,10 +24,12 @@ const Logo = styled.span`
 `;
 
 const ShareButton = styled.button`
-  color: ${colorBlack};
+  color: ${Colors.colorBlack};
+  width: 75px;
+  height: 35px;
   padding: 6px 15px;
   background: transparent;
-  border: 2px solid ${colorBlue};
+  border: 2px solid ${Colors.colorBlue};
   border-radius: 5px;
   margin-left: auto;
   cursor: pointer;
@@ -38,7 +44,7 @@ const ShareButton = styled.button`
     }
   }
   &:after {
-    background: ${colorBlue};
+    background: ${Colors.colorBlue};
     content: '';
     position: absolute;
     z-index: -1;
@@ -51,11 +57,12 @@ const ShareButton = styled.button`
 `;
 
 const Header = () => {
+  const mdContext = useContext(MdContext);
   return (
     <div>
       <HeaderWrap>
         <Logo>Napol style-document</Logo>
-        <ShareButton>Share</ShareButton>
+        <ShareButton onClick={() => mdContext.setIsMd(!mdContext.isOpen)}>new</ShareButton>
       </HeaderWrap>
     </div>
   );
