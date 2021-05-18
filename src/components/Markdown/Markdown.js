@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from 'react';
+import React, { useState, useContext, Fragment, useRef } from 'react';
 import styled from 'styled-components';
 
 // style
@@ -10,6 +10,7 @@ import { MdContext } from '../../store/MdStore';
 // markdown
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
+import ReactMarkdown from 'react-markdown';
 
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
@@ -44,26 +45,40 @@ const SaveButtonStyle = styled.button`
 
 const mdParser = new MarkdownIt();
 
-function handleEditorChange({ html, text }) {
-  console.log('handleEditorChange', html, text);
-}
-
 const Content = () => {
   const mdContext = useContext(MdContext);
+
   return <Fragment>{mdContext.isOpen ? <MdEditorBox /> : null}</Fragment>;
 };
 
 const MdEditorBox = () => {
+  const mdContext = useContext(MdContext);
+  const [value, setValue] = useState('Hello');
+
+  function handleEditorChange({ html, text }) {
+    const newValue = text.replace(/\d/g, '');
+    mdContext.setCurrentMdValue(newValue);
+    setValue(newValue);
+    console.log(`현재 mdContext mdValue : ${mdContext.currentMdValue}`);
+  }
+
   return (
     <MdWrap>
-      <MdEditor style={{ height: '500px' }} renderHTML={(text) => mdParser.render(text)} onChange={handleEditorChange} />
+      <MdEditor style={{ height: '500px' }} value={value} renderHTML={(text) => mdParser.render(text)} onChange={handleEditorChange} />
       <SaveButton>save</SaveButton>
     </MdWrap>
   );
 };
 
 const SaveButton = (props) => {
-  return <SaveButtonStyle>{props.children}</SaveButtonStyle>;
+  const mdContext = useContext(MdContext);
+
+  const handleSaveData = () => {
+    const { currentMdValue, setData, data } = mdContext;
+    setData(currentMdValue);
+    console.log(`data : ${data}`);
+  };
+  return <SaveButtonStyle onClick={handleSaveData}>{props.children}</SaveButtonStyle>;
 };
 
 export default Content;

@@ -4,12 +4,22 @@ export const MdContext = createContext();
 
 const MdStore = (props) => {
   const [isMd, setIsMd] = useState(false);
+  const [currentMdValue, setCurrentMdValue] = useState();
 
-  const mdOpen = {
+  // data
+  const [data, setData] = useState({
+    data: ''
+  });
+
+  const mdManager = {
     isOpen: isMd,
-    setIsMd // useState 전달
+    setIsMd, // useState 전달
+    currentMdValue,
+    setCurrentMdValue,
+    data,
+    setData
   };
-  return <MdContext.Provider value={mdOpen}>{props.children}</MdContext.Provider>;
+  return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;
 };
 
 export default MdStore;
