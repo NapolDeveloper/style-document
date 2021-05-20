@@ -12,6 +12,7 @@ import * as Fade from './style/FadeIn';
 // components
 import Header from './components/Header/Header';
 import Markdown from './components/Markdown/Markdown';
+import List from './components/List';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Header />
         <Markdown />
       </MdStore>
+      {/* <List /> */}
     </Fragment>
   );
 }
