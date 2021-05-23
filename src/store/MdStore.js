@@ -24,8 +24,6 @@ const MdStore = (props) => {
   const mdManager = {
     isOpen: isMd,
     setIsMd, // useState 전달
-    // currentMdValue,
-    // setCurrentMdValue,
     list,
     setList,
     title,
