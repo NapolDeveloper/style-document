@@ -57,7 +57,9 @@ const Content = () => {
       {isOpen ? <MdEditorBox /> : null}
       <ul>
         {list.map((item) => (
-          <li key={item.id}>{item.title}</li>
+          <li key={item.id}>
+            {item.title} {item.data}
+          </li>
         ))}
       </ul>
     </Fragment>
