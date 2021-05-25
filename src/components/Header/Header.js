@@ -23,7 +23,7 @@ const Logo = styled.span`
   font-weight: bold;
 `;
 
-const ShareButton = styled.button`
+const NewButton = styled.button`
   color: ${Colors.colorBlack};
   width: 75px;
   height: 35px;
@@ -58,11 +58,21 @@ const ShareButton = styled.button`
 
 const Header = () => {
   const mdContext = useContext(MdContext);
+
+  const { isOpen, mdValue } = mdContext;
+
+  const handleNew = () => {
+    if (mdValue) {
+      console.log('값이 존재합니다');
+      return;
+    }
+    mdContext.setIsMd(!isOpen);
+  };
   return (
     <div>
       <HeaderWrap>
         <Logo>Napol style-document</Logo>
-        <ShareButton onClick={() => mdContext.setIsMd(!mdContext.isOpen)}>new</ShareButton>
+        <NewButton onClick={handleNew}>new</NewButton>
       </HeaderWrap>
     </div>
   );

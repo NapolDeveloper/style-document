@@ -68,15 +68,16 @@ const Content = () => {
 
 const MdEditorBox = () => {
   const mdContext = useContext(MdContext);
-  const { list, setList } = mdContext;
+  const { list, setList, mdValue, setMdValue } = mdContext;
 
   // MdEditorBox에서 사용할 title 변수
   const [title, setTitle] = useState('');
-  const [value, setValue] = useState('Hello'); // Editor 내의 text
+  const [value, setValue] = useState(''); // Editor 내의 text
 
   const handleEditorChange = ({ html, text }) => {
     const newValue = text.replace(/\d/g, '');
     // setCurrentMdValue(newValue);
+    setMdValue(newValue);
     setValue(newValue);
   };
 
@@ -88,6 +89,7 @@ const MdEditorBox = () => {
     const newList = list.concat({ id: uuidv4(), title, data: value });
     setList(newList);
     setTitle('');
+    setMdValue('');
     console.log(list);
   };
 

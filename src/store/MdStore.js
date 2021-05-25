@@ -18,6 +18,7 @@ const MdStore = (props) => {
 
   const [isMd, setIsMd] = useState(false);
   // const [currentMdValue, setCurrentMdValue] = useState();
+  const [mdValue, setMdValue] = useState('');
   const [list, setList] = useState(initialList);
   const [title, setTitle] = useState('');
 
@@ -27,7 +28,9 @@ const MdStore = (props) => {
     list,
     setList,
     title,
-    setTitle
+    setTitle,
+    mdValue,
+    setMdValue
   };
   return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;
 };
