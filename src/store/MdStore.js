@@ -2,7 +2,19 @@ import React, { createContext, useReducer, useState } from 'react';
 
 export const MdContext = createContext();
 
+
+function reducer(state, action)
+{
+  switch(action.type)
+  {
+    case 'SAVE'
+  }
+}
+
 const MdStore = (props) => {
+
+  const [data, dispatch] = useReducer(reducer, '');
+
   const initialList = [
     {
       id: 1,
