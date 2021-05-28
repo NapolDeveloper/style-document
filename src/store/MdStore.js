@@ -8,6 +8,8 @@ function reducer(state, action)
   switch(action.type)
   {
     case 'SAVE'
+    // mdValue에 있는 데이터와 title에 있는 데이터를 list에 추가시키기
+    // Markdown.js에 있는 내용을 reducer로 수정
   }
 }
 
