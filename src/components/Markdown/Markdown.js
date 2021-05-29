@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment, useRef } from 'react';
+import React, { useContext, Fragment, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
@@ -16,6 +16,15 @@ import ReactMarkdown from 'react-markdown';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 
+const markdown = `
+# 헤딩
+**bold**
+`;
+
+const MarkDownStyle = styled.div`
+  font-size: 1rem;
+`;
+
 const MdWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,7 +34,14 @@ const MdWrap = styled.div`
   position: relative;
 `;
 
-const TitleBox = styled.input``;
+const TitleBox = styled.input`
+  margin-bottom: 20px;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 24px;
+`;
 
 const SaveButtonStyle = styled.button`
   position: absolute;
@@ -50,35 +66,32 @@ const mdParser = new MarkdownIt();
 
 const Content = () => {
   const mdContext = useContext(MdContext);
-  const { list, isOpen } = mdContext;
+  const { isOpen, contentList } = mdContext;
 
   return (
     <Fragment>
       {isOpen ? <MdEditorBox /> : null}
       <ul>
-        {list.map((item) => (
+        {contentList.map((item) => (
           <li key={item.id}>
             {item.title} {item.data}
           </li>
         ))}
       </ul>
+      <MarkDownStyle>
+        <ReactMarkdown>{markdown}</ReactMarkdown>
+      </MarkDownStyle>
     </Fragment>
   );
 };
 
 const MdEditorBox = () => {
   const mdContext = useContext(MdContext);
-  const { list, setList, mdValue, setMdValue } = mdContext;
-
-  // MdEditorBox에서 사용할 title 변수
-  const [title, setTitle] = useState('');
-  const [value, setValue] = useState(''); // Editor 내의 text
+  const { mdValue, setMdValue, contentDispatch, title, setTitle } = mdContext;
 
   const handleEditorChange = ({ html, text }) => {
     const newValue = text.replace(/\d/g, '');
-    // setCurrentMdValue(newValue);
     setMdValue(newValue);
-    setValue(newValue);
   };
 
   const handleTitleChange = (e) => {
@@ -86,24 +99,24 @@ const MdEditorBox = () => {
   };
 
   const handleSave = () => {
-    const newList = list.concat({ id: uuidv4(), title, data: value });
-    setList(newList);
+    // const newList = initialList.concat({ id: uuidv4(), title, data: value });
+    const newList = { id: uuidv4(), title, data: mdValue };
     setTitle('');
     setMdValue('');
-    console.log(list);
+    contentDispatch({ type: 'SAVE', list: newList });
   };
 
   return (
     <MdWrap>
       <MdTitleBox value={title} onChange={handleTitleChange} />
-      <MdEditor style={{ height: '500px' }} value={value} renderHTML={(text) => mdParser.render(text)} onChange={handleEditorChange} />
+      <MdEditor style={{ height: '500px' }} value={mdValue} renderHTML={(text) => mdParser.render(text)} onChange={handleEditorChange} />
       <SaveButton onSave={handleSave}>save</SaveButton>
     </MdWrap>
   );
 };
 
 const MdTitleBox = (props) => {
-  return <TitleBox type='text' value={props.value} onChange={props.onChange} />;
+  return <TitleBox type='text' placeholder='제목을 입력해주세요' value={props.value} onChange={props.onChange} />;
 };
 
 const SaveButton = (props) => {

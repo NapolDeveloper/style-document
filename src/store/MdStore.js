@@ -2,21 +2,7 @@ import React, { createContext, useReducer, useState } from 'react';
 
 export const MdContext = createContext();
 
-
-function reducer(state, action)
-{
-  switch(action.type)
-  {
-    case 'SAVE'
-    // mdValue에 있는 데이터와 title에 있는 데이터를 list에 추가시키기
-    // Markdown.js에 있는 내용을 reducer로 수정
-  }
-}
-
 const MdStore = (props) => {
-
-  const [data, dispatch] = useReducer(reducer, '');
-
   const initialList = [
     {
       id: 1,
@@ -29,22 +15,31 @@ const MdStore = (props) => {
       data: 'index 2'
     }
   ];
+  const [contentList, contentDispatch] = useReducer(contentReducer, initialList);
+  const [isMdOpen, setIsMdOpen] = useState(false); // editor on/off 여부
+  const [mdValue, setMdValue] = useState(''); // editor content value
+  const [title, setTitle] = useState(''); // editor title value
 
-  const [isMd, setIsMd] = useState(false);
-  // const [currentMdValue, setCurrentMdValue] = useState();
-  const [mdValue, setMdValue] = useState('');
-  const [list, setList] = useState(initialList);
-  const [title, setTitle] = useState('');
-
+  function contentReducer(state, action) {
+    switch (action.type) {
+      case 'CONSOLE':
+        return console.log('reducer test');
+      case 'SAVE':
+        return state.concat(action.list);
+      default:
+        return;
+    }
+  }
   const mdManager = {
-    isOpen: isMd,
-    setIsMd, // useState 전달
-    list,
-    setList,
+    isOpen: isMdOpen,
+    setIsMdOpen, // useState 전달
+    contentList,
     title,
     setTitle,
     mdValue,
-    setMdValue
+    setMdValue,
+    contentDispatch,
+    initialList
   };
   return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;
 };

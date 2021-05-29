@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
+// icon
+import { FaListUl } from 'react-icons/fa';
+
 // style
 import Colors from '../../style/Colors';
 
@@ -23,6 +26,11 @@ const Logo = styled.span`
   font-weight: bold;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  margin-left: auto;
+`;
+
 const NewButton = styled.button`
   color: ${Colors.colorBlack};
   width: 75px;
@@ -31,7 +39,6 @@ const NewButton = styled.button`
   background: transparent;
   border: 2px solid ${Colors.colorBlue};
   border-radius: 5px;
-  margin-left: auto;
   cursor: pointer;
   text-transform: uppercase;
   transition: 0.3s ease-in-out;
@@ -56,23 +63,43 @@ const NewButton = styled.button`
   }
 `;
 
+const ListButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${Colors.colorBlack};
+  margin-left: 25px;
+  font-size: 24px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    color: ${Colors.colorBlue};
+  }
+`;
+
 const Header = () => {
   const mdContext = useContext(MdContext);
 
-  const { isOpen, mdValue } = mdContext;
+  const { isMdOpen, mdValue } = mdContext;
 
   const handleNew = () => {
     if (mdValue) {
       console.log('값이 존재합니다');
       return;
     }
-    mdContext.setIsMd(!isOpen);
+    mdContext.setIsMdOpen(!isMdOpen);
   };
   return (
     <div>
       <HeaderWrap>
         <Logo>Napol style-document</Logo>
-        <NewButton onClick={handleNew}>new</NewButton>
+        <ButtonContainer>
+          <NewButton onClick={handleNew}>new</NewButton>
+          <ListButton>
+            <FaListUl />
+          </ListButton>
+        </ButtonContainer>
       </HeaderWrap>
     </div>
   );

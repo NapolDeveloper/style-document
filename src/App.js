@@ -21,6 +21,7 @@ function App() {
       <MdStore>
         <Header />
         <Markdown />
+        <List />
       </MdStore>
       {/* <List /> */}
     </Fragment>
