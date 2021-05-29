@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState } from 'react';
+import React, { createContext, useReducer, useState, useRef } from 'react';
 
 export const MdContext = createContext();
 
@@ -20,7 +20,9 @@ const MdStore = (props) => {
   const [mdValue, setMdValue] = useState(''); // editor content value
   const [title, setTitle] = useState(''); // editor title value
 
-  let listCount = contentList.length;
+  // ref
+  // const mdInputRef = useRef();
+
   function contentReducer(state, action) {
     switch (action.type) {
       case 'CONSOLE':
@@ -37,14 +39,14 @@ const MdStore = (props) => {
     }
   }
   const mdManager = {
-    isOpen: isMdOpen,
+    isMdOpen, // md on/off
     setIsMdOpen, // useState 전달
-    contentList,
-    title,
+    contentList, //
+    title, // md title
     setTitle,
-    mdValue,
+    mdValue, // md value(data)
     setMdValue,
-    contentDispatch,
+    contentDispatch, // content dispatch
     initialList
   };
   return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;

@@ -36,14 +36,14 @@ const List = () => {
 export const ListItem = () => {
   const mdContext = useContext(MdContext);
 
-  const { contentList, mdValue, setMdValue, isOpen, setTitle, contentDispatch } = mdContext;
+  const { contentList, mdValue, setMdValue, isMdOpen, setTitle, contentDispatch, mdInput } = mdContext;
 
   const handleClickList = (item) => {
     console.log(`id: ${item.id} || title: ${item.title} || data: ${item.data}`);
     // contentDispatch({ type: 'OPEN' });
 
     // [ 나중에 수정하기 기능으로 옮겨야함 ]
-    if (isOpen) {
+    if (isMdOpen) {
       setMdValue(item.data + ' ');
       setTitle(item.title);
     } else {

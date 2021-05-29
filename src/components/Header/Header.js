@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // icon
-import { FaListUl } from 'react-icons/fa';
+import { FaListUl, FaEdit } from 'react-icons/fa';
 
 // style
 import Colors from '../../style/Colors';
@@ -21,7 +22,17 @@ const HeaderWrap = styled.div`
   margin-bottom: 100px;
 `;
 
+const IconContainer = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 25px;
+  font-size: 26px;
+`;
+
 const Logo = styled.span`
+  color: ${Colors.colorBlack};
   font-size: 14px;
   font-weight: bold;
 `;
@@ -33,6 +44,7 @@ const ButtonContainer = styled.div`
 
 const NewButton = styled.button`
   color: ${Colors.colorBlack};
+  font-size: 13px;
   width: 75px;
   height: 35px;
   padding: 6px 15px;
@@ -40,7 +52,6 @@ const NewButton = styled.button`
   border: 2px solid ${Colors.colorBlue};
   border-radius: 5px;
   cursor: pointer;
-  text-transform: uppercase;
   transition: 0.3s ease-in-out;
   position: relative;
   font-weight: bold; // bold or 500 뭐가 더 좋을지 모르겠다..
@@ -63,43 +74,21 @@ const NewButton = styled.button`
   }
 `;
 
-const ListButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${Colors.colorBlack};
-  margin-left: 25px;
-  font-size: 24px;
-  position: relative;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-  &:hover {
-    color: ${Colors.colorBlue};
-  }
-`;
-
 const Header = () => {
-  const mdContext = useContext(MdContext);
-
-  const { isMdOpen, mdValue } = mdContext;
-
-  const handleNew = () => {
-    if (mdValue) {
-      console.log('값이 존재합니다');
-      return;
-    }
-    mdContext.setIsMdOpen(!isMdOpen);
-  };
   return (
     <div>
       <HeaderWrap>
-        <Logo>Napol style-document</Logo>
+        <Link to={'/'}>
+          <Logo>Napol style-document</Logo>
+        </Link>
         <ButtonContainer>
-          <NewButton onClick={handleNew}>new</NewButton>
-          <ListButton>
-            <FaListUl />
-          </ListButton>
+          <Link to={'/markdown'}>
+            <NewButton>Edit</NewButton>
+          </Link>
         </ButtonContainer>
+        <IconContainer>
+          <FaListUl />
+        </IconContainer>
       </HeaderWrap>
     </div>
   );

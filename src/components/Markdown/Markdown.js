@@ -16,6 +16,9 @@ import ReactMarkdown from 'react-markdown';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 
+// components
+import List from '../List';
+
 const markdown = `
 # 헤딩
 **bold**
@@ -66,11 +69,20 @@ const mdParser = new MarkdownIt();
 
 const Content = () => {
   const mdContext = useContext(MdContext);
-  const { isOpen, contentList } = mdContext;
 
+  const { isMdOpen, mdValue, contentList } = mdContext;
+
+  const handleNew = () => {
+    if (mdValue) {
+      console.log('값이 존재합니다');
+      return;
+    }
+    mdContext.setIsMdOpen(!isMdOpen);
+  };
   return (
     <Fragment>
-      {isOpen ? <MdEditorBox /> : null}
+      <div onClick={handleNew}>글 작성하기</div>
+      {isMdOpen ? <MdEditorBox /> : null}
       {/* <ul>
         {contentList.map((item) => (
           <li key={item.id}>
@@ -82,6 +94,7 @@ const Content = () => {
       <MarkDownStyle>
         <ReactMarkdown>{markdown}</ReactMarkdown>
       </MarkDownStyle> */}
+      <List />
     </Fragment>
   );
 };
@@ -101,6 +114,10 @@ const MdEditorBox = () => {
 
   const handleSave = () => {
     // const newList = initialList.concat({ id: uuidv4(), title, data: value });
+    if (!title || !mdValue) {
+      console.log('값이 비어있습니다');
+      return;
+    }
     const newList = { id: uuidv4(), title, data: mdValue };
     setTitle('');
     setMdValue('');
