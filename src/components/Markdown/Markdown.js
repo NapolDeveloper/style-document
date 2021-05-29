@@ -71,16 +71,17 @@ const Content = () => {
   return (
     <Fragment>
       {isOpen ? <MdEditorBox /> : null}
-      <ul>
+      {/* <ul>
         {contentList.map((item) => (
           <li key={item.id}>
             {item.title} {item.data}
           </li>
         ))}
-      </ul>
+      </ul> */}
+      {/*       
       <MarkDownStyle>
         <ReactMarkdown>{markdown}</ReactMarkdown>
-      </MarkDownStyle>
+      </MarkDownStyle> */}
     </Fragment>
   );
 };

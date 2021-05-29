@@ -43,7 +43,7 @@ const NewButton = styled.button`
   text-transform: uppercase;
   transition: 0.3s ease-in-out;
   position: relative;
-  font-weight: 500;
+  font-weight: bold; // bold or 500 뭐가 더 좋을지 모르겠다..
   &:hover {
     color: white;
     &:after {

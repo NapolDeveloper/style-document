@@ -20,12 +20,18 @@ const MdStore = (props) => {
   const [mdValue, setMdValue] = useState(''); // editor content value
   const [title, setTitle] = useState(''); // editor title value
 
+  let listCount = contentList.length;
   function contentReducer(state, action) {
     switch (action.type) {
       case 'CONSOLE':
         return console.log('reducer test');
       case 'SAVE':
         return state.concat(action.list);
+
+      case 'OPEN': {
+        // console.log('test');
+        return;
+      }
       default:
         return;
     }
