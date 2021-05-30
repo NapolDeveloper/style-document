@@ -12,11 +12,12 @@ import * as Fade from './style/FadeIn';
 
 // components
 import Header from './components/Header/Header';
+
 import Markdown from './components/Markdown/Markdown';
-import List from './components/List';
 import Home from './components/Home/Home';
+import DocumentList from './components/DocumentList/DocumentList';
+
 import SideBar from './components/SideBar/SideBar';
-import NewContent from './components/NewContent/NewContent';
 
 function App() {
   return (
@@ -27,12 +28,13 @@ function App() {
           <Header />
           <Switch>
             <Route exact path='/' render={() => <Home />} />
-            <Route exact path='/markdown' render={() => <Markdown />} />
+            <Route exact path='/edit' render={() => <Markdown />} />
+            <Route exact path='/list' render={() => <DocumentList />} />
             {/* <Markdown /> */}
           </Switch>
+          <SideBar />
         </Router>
       </ColorBoxStore>
-      <SideBar />
     </MdStore>
   );
 }

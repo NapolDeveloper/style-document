@@ -16,6 +16,7 @@ const MdStore = (props) => {
     }
   ];
   const [contentList, contentDispatch] = useReducer(contentReducer, initialList);
+  // const [sideBar, sideBarDispatch] = useReducer(sideBarReducer, false);
   const [isMdOpen, setIsMdOpen] = useState(false); // editor on/off 여부
   const [mdValue, setMdValue] = useState(''); // editor content value
   const [title, setTitle] = useState(''); // editor title value

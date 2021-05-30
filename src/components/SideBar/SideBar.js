@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 // store
 import { MdContext } from '../../store/MdStore';
@@ -111,9 +112,15 @@ const SideBar = () => {
       <NoneSideAreaC />
       <SideBarStyle>
         <CloseBtn />
-        <NavMenu icon={<FaHome />}>Home</NavMenu>
-        <NavMenu icon={<FaPen />}>Make New</NavMenu>
-        <NavMenu icon={<FaListAlt />}>List</NavMenu>
+        <Link to={'/'}>
+          <NavMenu icon={<FaHome />}>Home</NavMenu>
+        </Link>
+        <Link to={'/edit'}>
+          <NavMenu icon={<FaPen />}>Make New</NavMenu>
+        </Link>
+        <Link to={'/list'}>
+          <NavMenu icon={<FaListAlt />}>List</NavMenu>
+        </Link>
       </SideBarStyle>
     </SideBarArea>
   );
@@ -133,8 +140,13 @@ export const NavDes = (props) => {
 };
 
 export const NavMenu = (props) => {
+  const mdContext = useContext(MdContext);
+  const { setIsOpenSideBar } = mdContext;
+  const handleOffSide = () => {
+    setIsOpenSideBar(false);
+  };
   return (
-    <MenuBox>
+    <MenuBox onClick={handleOffSide}>
       <MenuIcon>{props.icon}</MenuIcon>
       <MenuTitle>{props.children}</MenuTitle>
     </MenuBox>

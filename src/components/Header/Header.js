@@ -27,7 +27,7 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 25px;
+  margin-left: auto;
 `;
 const IconItem = styled.div`
   height: 26px; // font-size랑 맞추기
@@ -88,7 +88,7 @@ const Header = () => {
     <div>
       <HeaderWrap>
         <HeaderLogo>Napol style-document</HeaderLogo>
-        <MenuBtn>Edit</MenuBtn>
+        {/* <MenuBtn>Edit</MenuBtn> */}
         <ListIcon />
       </HeaderWrap>
     </div>
@@ -96,19 +96,13 @@ const Header = () => {
 };
 
 export const HeaderLogo = (props) => {
-  return (
-    <Link to={'/'}>
-      <Logo>{props.children}</Logo>
-    </Link>
-  );
+  return <Logo>{props.children}</Logo>;
 };
 
 export const MenuBtn = (props) => {
   return (
     <ButtonContainer>
-      <Link to={'/markdown'}>
-        <EditButton>{props.children}</EditButton>
-      </Link>
+      <EditButton>{props.children}</EditButton>
     </ButtonContainer>
   );
 };
