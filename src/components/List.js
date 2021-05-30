@@ -1,44 +1,66 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { Fragment, useContext, useState } from 'react';
 
-const initialList = [
-  {
-    id: 'a',
-    name: 'Robin'
-  },
-  {
-    id: 'b',
-    name: 'Napol'
+import styled from 'styled-components';
+import Colors from '../style/Colors';
+import { FaRegWindowClose } from 'react-icons/fa';
+
+// store
+import { MdContext } from '../store/MdStore';
+
+//
+
+const ListBox = styled.div`
+  font-size: 16px;
+  overflow: hidden;
+  padding: 10px;
+  background-color: ${Colors.colorBlue};
+  &:hover {
+    background-color: ${Colors.colorHoverBlue};
+    /* background-color: black; */
   }
-];
+`;
+const ListTitle = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer; // test
+  color: white;
+`;
 
+// List 렌더링
 const List = () => {
-  const [list, setList] = useState(initialList);
-  const [name, setName] = useState('');
+  return (
+    <div>
+      <ListItem />
+    </div>
+  );
+};
 
-  const handleChange = (e) => {
-    setName(e.target.value);
-  };
-  const handleAdd = () => {
-    const newList = list.concat({ name, id: uuidv4() });
-    setList(newList);
-    setName('');
+export const ListItem = () => {
+  const mdContext = useContext(MdContext);
+
+  const { contentList, setMdValue, isMdOpen, setTitle, contentDispatch } = mdContext;
+
+  const handleClickList = (item) => {
+    console.log(`id: ${item.id} || title: ${item.title} || data: ${item.data}`);
+    // contentDispatch({ type: 'OPEN' });
+
+    // [ 나중에 수정하기 기능으로 옮겨야함 ]
+    if (isMdOpen) {
+      setMdValue(item.data + ' ');
+      setTitle(item.title);
+    } else {
+      console.log(`에디터가 열려있지 않습니다`);
+    }
   };
 
   return (
-    <div>
-      <div>
-        <input type='text' value={name} onChange={handleChange} />
-        <button type='button' onClick={handleAdd}>
-          Add
-        </button>
-      </div>
-      <ul>
-        {list.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
-    </div>
+    <Fragment>
+      {contentList.map((item) => (
+        <ListBox key={item.id}>
+          <ListTitle onClick={() => handleClickList(item)}>{item.title}</ListTitle>
+        </ListBox>
+      ))}
+    </Fragment>
   );
 };
 

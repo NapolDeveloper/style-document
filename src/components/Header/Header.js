@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-// style
-import Colors from '../../style/Colors';
 
 // store
 import { MdContext } from '../../store/MdStore';
+
+// icon
+import { FaListUl, FaEdit } from 'react-icons/fa';
+
+// style
+import Colors from '../../style/Colors';
 
 const HeaderWrap = styled.div`
   display: flex;
@@ -18,25 +22,48 @@ const HeaderWrap = styled.div`
   margin-bottom: 100px;
 `;
 
+const IconContainer = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+`;
+const IconItem = styled.div`
+  height: 26px; // font-size랑 맞추기
+  font-size: 26px;
+  color: ${Colors.colorBlack};
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    color: ${Colors.colorBlue};
+  }
+`;
+
 const Logo = styled.span`
+  color: ${Colors.colorBlack};
   font-size: 14px;
   font-weight: bold;
 `;
 
-const NewButton = styled.button`
+const ButtonContainer = styled.div`
+  display: flex;
+  margin-left: auto;
+`;
+
+const EditButton = styled.button`
   color: ${Colors.colorBlack};
+  font-size: 13px;
   width: 75px;
   height: 35px;
   padding: 6px 15px;
   background: transparent;
   border: 2px solid ${Colors.colorBlue};
   border-radius: 5px;
-  margin-left: auto;
   cursor: pointer;
-  text-transform: uppercase;
   transition: 0.3s ease-in-out;
   position: relative;
-  font-weight: 500;
+  font-weight: bold; // bold or 500 뭐가 더 좋을지 모르겠다..
   &:hover {
     color: white;
     &:after {
@@ -57,24 +84,43 @@ const NewButton = styled.button`
 `;
 
 const Header = () => {
-  const mdContext = useContext(MdContext);
-
-  const { isOpen, mdValue } = mdContext;
-
-  const handleNew = () => {
-    if (mdValue) {
-      console.log('값이 존재합니다');
-      return;
-    }
-    mdContext.setIsMd(!isOpen);
-  };
   return (
     <div>
       <HeaderWrap>
-        <Logo>Napol style-document</Logo>
-        <NewButton onClick={handleNew}>new</NewButton>
+        <HeaderLogo>Napol style-document</HeaderLogo>
+        {/* <MenuBtn>Edit</MenuBtn> */}
+        <ListIcon />
       </HeaderWrap>
     </div>
+  );
+};
+
+export const HeaderLogo = (props) => {
+  return <Logo>{props.children}</Logo>;
+};
+
+export const MenuBtn = (props) => {
+  return (
+    <ButtonContainer>
+      <EditButton>{props.children}</EditButton>
+    </ButtonContainer>
+  );
+};
+
+export const ListIcon = () => {
+  const mdContext = useContext(MdContext);
+  const { isOpenSideBar, setIsOpenSideBar } = mdContext;
+
+  const handleToggle = () => {
+    setIsOpenSideBar(!isOpenSideBar);
+  };
+
+  return (
+    <IconContainer>
+      <IconItem onClick={handleToggle}>
+        <FaListUl />
+      </IconItem>
+    </IconContainer>
   );
 };
 
