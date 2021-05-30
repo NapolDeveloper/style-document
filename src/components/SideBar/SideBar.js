@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // store
@@ -17,9 +17,10 @@ const SideBarArea = styled.div`
 `;
 const SideBarStyle = styled.div`
   width: 250px;
+  /* width: ${(props) => (props.isOpen ? '250px' : '0')}; */
   height: 100%;
   background-color: ${Colors.colorBlue};
-  border-radius: 5px 0 0 5px;
+  border-radius: 10px 0 0 10px;
   padding: 15px;
   position: absolute;
   z-index: 4;

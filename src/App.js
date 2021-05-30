@@ -1,5 +1,4 @@
-import { Fragment } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // store
@@ -27,10 +26,11 @@ function App() {
           <GlobalStyle />
           <Header />
           <Switch>
-            <Route exact path='/' render={() => <Home />} />
-            <Route exact path='/edit' render={() => <Markdown />} />
-            <Route exact path='/list' render={() => <DocumentList />} />
-            {/* <Markdown /> */}
+            <Fade.FadeAnimation>
+              <Route exact path='/' render={() => <Home />} />
+              <Route exact path='/edit' render={() => <Markdown />} />
+              <Route exact path='/list' render={() => <DocumentList />} />
+            </Fade.FadeAnimation>
           </Switch>
           <SideBar />
         </Router>

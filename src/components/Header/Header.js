@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // store
 import { MdContext } from '../../store/MdStore';
 
 // icon
-import { FaListUl, FaEdit } from 'react-icons/fa';
+import { FaListUl } from 'react-icons/fa';
 
 // style
 import Colors from '../../style/Colors';
@@ -19,7 +18,7 @@ const HeaderWrap = styled.div`
   height: 50px;
   border-bottom: 1px solid #bfbfbf;
   padding: 0 20px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 `;
 
 const IconContainer = styled.div`

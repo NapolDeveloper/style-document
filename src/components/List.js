@@ -1,8 +1,7 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 import styled from 'styled-components';
 import Colors from '../style/Colors';
-import { FaRegWindowClose } from 'react-icons/fa';
 
 // store
 import { MdContext } from '../store/MdStore';
@@ -38,7 +37,7 @@ const List = () => {
 export const ListItem = () => {
   const mdContext = useContext(MdContext);
 
-  const { contentList, setMdValue, isMdOpen, setTitle, contentDispatch } = mdContext;
+  const { contentList, setMdValue, isMdOpen, setTitle } = mdContext;
 
   const handleClickList = (item) => {
     console.log(`id: ${item.id} || title: ${item.title} || data: ${item.data}`);

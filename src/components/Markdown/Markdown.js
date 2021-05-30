@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useRef } from 'react';
+import React, { useContext, Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
@@ -11,14 +11,12 @@ import { MdContext } from '../../store/MdStore';
 // markdown
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
-import ReactMarkdown from 'react-markdown';
 
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 
-// components
-import List from '../List';
-
+/* markdown rendering example
+import ReactMarkdown from 'react-markdown';
 const markdown = `
 # 헤딩
 **bold**
@@ -27,6 +25,7 @@ const markdown = `
 const MarkDownStyle = styled.div`
   font-size: 1rem;
 `;
+*/
 
 const MdWrap = styled.div`
   display: flex;
@@ -70,7 +69,7 @@ const mdParser = new MarkdownIt();
 const Content = () => {
   const mdContext = useContext(MdContext);
 
-  const { isMdOpen, mdValue, contentList } = mdContext;
+  const { isMdOpen, mdValue } = mdContext;
 
   const handleNew = () => {
     if (mdValue) {
@@ -83,25 +82,13 @@ const Content = () => {
     <Fragment>
       <div onClick={handleNew}>글 작성하기</div>
       {isMdOpen ? <MdEditorBox /> : null}
-      {/* <ul>
-        {contentList.map((item) => (
-          <li key={item.id}>
-            {item.title} {item.data}
-          </li>
-        ))}
-      </ul> */}
-      {/*       
-      <MarkDownStyle>
-        <ReactMarkdown>{markdown}</ReactMarkdown>
-      </MarkDownStyle> */}
-      <List />
     </Fragment>
   );
 };
 
 const MdEditorBox = () => {
   const mdContext = useContext(MdContext);
-  const { mdValue, setMdValue, contentDispatch, title, setTitle } = mdContext;
+  const { mdValue, setMdValue, contentDispatch, title, setTitle, setIsMdOpen, isMdOpen } = mdContext;
 
   const handleEditorChange = ({ html, text }) => {
     const newValue = text.replace(/\d/g, '');
@@ -118,9 +105,17 @@ const MdEditorBox = () => {
       console.log('값이 비어있습니다');
       return;
     }
-    const newList = { id: uuidv4(), title, data: mdValue };
+    // 날짜 값 생성
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const day = currentDate.getDate();
+
+    const newList = { id: uuidv4(), title, data: mdValue, date: `${year}년 ${month + 1}월 ${day}일` };
+    console.log(newList);
     setTitle('');
     setMdValue('');
+    setIsMdOpen(!isMdOpen);
     contentDispatch({ type: 'SAVE', list: newList });
   };
 

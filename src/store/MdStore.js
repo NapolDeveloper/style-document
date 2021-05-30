@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState, useRef } from 'react';
+import React, { createContext, useReducer, useState } from 'react';
 
 export const MdContext = createContext();
 
@@ -6,13 +6,15 @@ const MdStore = (props) => {
   const initialList = [
     {
       id: 1,
-      title: 'title 1',
-      data: 'index 1'
+      title: 'React Hooks 배워보기',
+      data: 'index 1',
+      date: '2021년 5월 30일'
     },
     {
       id: 2,
-      title: 'title 2',
-      data: 'index 2'
+      title: 'Svelte는 언제배우지...',
+      data: 'index 2',
+      date: '2021년 6월 1일'
     }
   ];
   const [contentList, contentDispatch] = useReducer(contentReducer, initialList);
@@ -35,6 +37,11 @@ const MdStore = (props) => {
       case 'OPEN': {
         // console.log('test');
         return;
+      }
+      case 'REMOVE': {
+        // return console.log(`remove ${action.id}`);
+        return state.filter((list) => list.id !== action.id);
+        // return;
       }
       default:
         return;

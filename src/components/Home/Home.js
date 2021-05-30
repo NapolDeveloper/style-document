@@ -13,6 +13,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-top: 150px;
 `;
 
 const Title = styled.div`
@@ -56,6 +57,7 @@ const ColorBoxStyle = styled.div`
   height: 150px;
   background-color: ${(props) => props.color};
   margin: 0 10px;
+  border-radius: 10px;
   position: relative;
   &:hover {
     &:after {
@@ -76,6 +78,7 @@ const ColorBoxStyle = styled.div`
     opacity: 0.8;
     left: 0;
     top: 0;
+    border-radius: 10px;
     background-color: ${Colors.colorBlack};
     transition: 0.3s ease-in-out;
     cursor: pointer;
@@ -86,7 +89,7 @@ const ColorBoxInputContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 100px;
 `;
 
 const ColorBoxInput = styled.input`
@@ -177,6 +180,9 @@ export const ColorInput = () => {
   const { colorBoxDispatch } = colorBoxContext;
 
   const handleAddColor = () => {
+    if (inputValue === '') {
+      return;
+    }
     let hex = inputValue.replace(/^\s+|\s+$/g, ''); // 앞, 뒤 공백제거
     hex = hex.replace(/(^ *)|( *$)/g, '').replace(/ +/g, ' '); // trim 추가
     const newArr = hex.split(' ');
