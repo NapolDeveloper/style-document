@@ -19,6 +19,7 @@ const MdStore = (props) => {
   const [isMdOpen, setIsMdOpen] = useState(false); // editor on/off 여부
   const [mdValue, setMdValue] = useState(''); // editor content value
   const [title, setTitle] = useState(''); // editor title value
+  const [isOpenSideBar, setIsOpenSideBar] = useState(false); // content list on/off 여부
 
   // ref
   // const mdInputRef = useRef();
@@ -47,7 +48,9 @@ const MdStore = (props) => {
     mdValue, // md value(data)
     setMdValue,
     contentDispatch, // content dispatch
-    initialList
+    initialList,
+    isOpenSideBar,
+    setIsOpenSideBar
   };
   return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;
 };

@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+// store
+import { MdContext } from '../../store/MdStore';
+
 // icon
 import { FaListUl, FaEdit } from 'react-icons/fa';
 
 // style
 import Colors from '../../style/Colors';
-
-// store
-import { MdContext } from '../../store/MdStore';
 
 const HeaderWrap = styled.div`
   display: flex;
@@ -28,7 +28,16 @@ const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 25px;
+`;
+const IconItem = styled.div`
+  height: 26px; // font-size랑 맞추기
   font-size: 26px;
+  color: ${Colors.colorBlack};
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    color: ${Colors.colorBlue};
+  }
 `;
 
 const Logo = styled.span`
@@ -42,7 +51,7 @@ const ButtonContainer = styled.div`
   margin-left: auto;
 `;
 
-const NewButton = styled.button`
+const EditButton = styled.button`
   color: ${Colors.colorBlack};
   font-size: 13px;
   width: 75px;
@@ -78,19 +87,46 @@ const Header = () => {
   return (
     <div>
       <HeaderWrap>
-        <Link to={'/'}>
-          <Logo>Napol style-document</Logo>
-        </Link>
-        <ButtonContainer>
-          <Link to={'/markdown'}>
-            <NewButton>Edit</NewButton>
-          </Link>
-        </ButtonContainer>
-        <IconContainer>
-          <FaListUl />
-        </IconContainer>
+        <HeaderLogo>Napol style-document</HeaderLogo>
+        <MenuBtn>Edit</MenuBtn>
+        <ListIcon />
       </HeaderWrap>
     </div>
+  );
+};
+
+export const HeaderLogo = (props) => {
+  return (
+    <Link to={'/'}>
+      <Logo>{props.children}</Logo>
+    </Link>
+  );
+};
+
+export const MenuBtn = (props) => {
+  return (
+    <ButtonContainer>
+      <Link to={'/markdown'}>
+        <EditButton>{props.children}</EditButton>
+      </Link>
+    </ButtonContainer>
+  );
+};
+
+export const ListIcon = () => {
+  const mdContext = useContext(MdContext);
+  const { isOpenSideBar, setIsOpenSideBar } = mdContext;
+
+  const handleToggle = () => {
+    setIsOpenSideBar(!isOpenSideBar);
+  };
+
+  return (
+    <IconContainer>
+      <IconItem onClick={handleToggle}>
+        <FaListUl />
+      </IconItem>
+    </IconContainer>
   );
 };
 

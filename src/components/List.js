@@ -1,34 +1,36 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 
 import styled from 'styled-components';
+import Colors from '../style/Colors';
+import { FaRegWindowClose } from 'react-icons/fa';
 
 // store
 import { MdContext } from '../store/MdStore';
 
-const ListContainer = styled.div`
-  width: 200px;
-  height: 100%;
-  background-color: #efef;
-`;
+//
 
+const ListBox = styled.div`
+  font-size: 16px;
+  overflow: hidden;
+  padding: 10px;
+  background-color: ${Colors.colorBlue};
+  &:hover {
+    background-color: ${Colors.colorHoverBlue};
+    /* background-color: black; */
+  }
+`;
 const ListTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
   cursor: pointer; // test
-`;
-
-const ListContent = styled.div`
-  font-size: 16px;
-  overflow: hidden;
+  color: white;
 `;
 
 // List 렌더링
 const List = () => {
   return (
     <div>
-      <ListContainer>
-        <ListItem />
-      </ListContainer>
+      <ListItem />
     </div>
   );
 };
@@ -36,7 +38,7 @@ const List = () => {
 export const ListItem = () => {
   const mdContext = useContext(MdContext);
 
-  const { contentList, mdValue, setMdValue, isMdOpen, setTitle, contentDispatch, mdInput } = mdContext;
+  const { contentList, setMdValue, isMdOpen, setTitle, contentDispatch } = mdContext;
 
   const handleClickList = (item) => {
     console.log(`id: ${item.id} || title: ${item.title} || data: ${item.data}`);
@@ -54,9 +56,9 @@ export const ListItem = () => {
   return (
     <Fragment>
       {contentList.map((item) => (
-        <ListTitle key={item.id} onClick={() => handleClickList(item)}>
-          {item.title}
-        </ListTitle>
+        <ListBox key={item.id}>
+          <ListTitle onClick={() => handleClickList(item)}>{item.title}</ListTitle>
+        </ListBox>
       ))}
     </Fragment>
   );
