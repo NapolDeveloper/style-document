@@ -16,7 +16,9 @@ import Markdown from './components/Markdown/Markdown';
 import Home from './components/Home/Home';
 import DocumentList from './components/DocumentList/DocumentList';
 
+// on/off components
 import SideBar from './components/SideBar/SideBar';
+import { RemoveModal } from './components/Modal/Modal';
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
             </Fade.FadeAnimation>
           </Switch>
           <SideBar />
+          <RemoveModal />
         </Router>
       </ColorBoxStore>
     </MdStore>

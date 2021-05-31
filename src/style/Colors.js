@@ -5,7 +5,10 @@ const Colors = {
   colorLightBlue: '#1A73FE',
   colorGrey: '#d9d9d9',
   colorLightGrey: '#f5f5f5',
-  colorHoverGrey: '#e8e8e8'
+  colorHoverGrey: '#E7E9EB',
+  colorWhiteGrey: '#F8F8F9',
+  colorWhite: '#fff',
+  colorRed: '#D63A4A'
 };
 
 export default Colors;

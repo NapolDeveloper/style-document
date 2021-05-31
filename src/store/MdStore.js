@@ -23,6 +23,9 @@ const MdStore = (props) => {
   const [mdValue, setMdValue] = useState(''); // editor content value
   const [title, setTitle] = useState(''); // editor title value
   const [isOpenSideBar, setIsOpenSideBar] = useState(false); // content list on/off 여부
+  const [isRemoveModal, setIsRemoveModal] = useState(false);
+
+  const [removeId, setRemoveId] = useState();
 
   // ref
   // const mdInputRef = useRef();
@@ -57,8 +60,12 @@ const MdStore = (props) => {
     setMdValue,
     contentDispatch, // content dispatch
     initialList,
-    isOpenSideBar,
-    setIsOpenSideBar
+    isOpenSideBar, // sidebar
+    setIsOpenSideBar,
+    isRemoveModal, // remove modal
+    setIsRemoveModal,
+    removeId,
+    setRemoveId
   };
   return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;
 };

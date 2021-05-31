@@ -37,6 +37,10 @@ const ColorBoxContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 1000px;
+  /* background-color: ${Colors.colorLightGrey}; */
 `;
 
 const ColorBoxHex = styled.div`
@@ -58,6 +62,7 @@ const ColorBoxStyle = styled.div`
   background-color: ${(props) => props.color};
   margin: 0 10px;
   border-radius: 10px;
+  margin-bottom: 10px;
   position: relative;
   &:hover {
     &:after {

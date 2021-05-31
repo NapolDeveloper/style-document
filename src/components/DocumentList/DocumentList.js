@@ -93,10 +93,11 @@ const ListItem = () => {
 
 export const ListItemIcon = (props) => {
   const mdContext = useContext(MdContext);
-  const { contentDispatch } = mdContext;
+  const { setRemoveId, setIsRemoveModal, isRemoveModal } = mdContext;
 
   const onRemove = (id) => {
-    contentDispatch({ type: 'REMOVE', id });
+    setIsRemoveModal(!isRemoveModal);
+    setRemoveId(props.id);
   };
   return (
     <IconBox>
