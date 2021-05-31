@@ -24,7 +24,8 @@ const ModalBox = styled.div`
   top: 50%;
 `;
 const ModalDescription = styled.div`
-  margin-bottom: 40px;
+  font-size: 20px;
+  margin-bottom: 50px;
 `;
 const ModalButtonWrap = styled.div`
   display: flex;
@@ -70,13 +71,13 @@ export const RemoveModal = (props) => {
     <div>
       {isRemoveModal ? (
         <ModalBox>
-          <ModalDescription>정말로 삭제하시겠습니까?</ModalDescription>
+          <ModalDescription>文を削除しましょうか？</ModalDescription>
           <ModalButtonWrap>
             <ModalButton onClick={onRemove} color={Colors.colorRed}>
-              삭제
+              Delete
             </ModalButton>
             <ModalButton onClick={onCancel} color={Colors.colorBlue}>
-              취소
+              Cancel
             </ModalButton>
           </ModalButtonWrap>
         </ModalBox>
