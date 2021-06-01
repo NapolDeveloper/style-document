@@ -36,10 +36,11 @@ const ModalButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 130px;
   border-radius: 10px;
   background-color: ${Colors.colorWhite};
   border: 2px solid ${(props) => props.color};
-  padding: 7px 30px;
+  padding: 7px 25px;
   margin: 0 30px;
   transition: 0.3s ease-in-out;
   cursor: pointer;
@@ -74,10 +75,10 @@ export const RemoveModal = (props) => {
           <ModalDescription>文を削除しましょうか？</ModalDescription>
           <ModalButtonWrap>
             <ModalButton onClick={onRemove} color={Colors.colorRed}>
-              Delete
+              削除
             </ModalButton>
             <ModalButton onClick={onCancel} color={Colors.colorBlue}>
-              Cancel
+              キャンセル
             </ModalButton>
           </ModalButtonWrap>
         </ModalBox>

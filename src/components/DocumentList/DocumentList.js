@@ -43,6 +43,7 @@ const ListBox = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  transition: 0.2s ease-in-out;
   &:before {
     content: '';
     position: absolute;

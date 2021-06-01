@@ -129,7 +129,7 @@ const MdEditorBox = () => {
 };
 
 const MdTitleBox = (props) => {
-  return <TitleBox type='text' placeholder='제목을 입력해주세요' value={props.value} onChange={props.onChange} />;
+  return <TitleBox type='text' placeholder='タイトルを入力してください' value={props.value} onChange={props.onChange} />;
 };
 
 const SaveButton = (props) => {
