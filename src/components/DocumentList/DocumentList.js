@@ -25,7 +25,7 @@ const IconBox = styled.div`
   right: 10px;
 `;
 const IconItem = styled.div`
-  transition: 0.3s ease-in-out;
+  transition: 0.1s ease-in-out;
   margin-bottom: 10px;
   &:hover {
     color: ${Colors.colorBlue};

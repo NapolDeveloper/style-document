@@ -42,7 +42,7 @@ const ModalButton = styled.div`
   border: 2px solid ${(props) => props.color};
   padding: 7px 25px;
   margin: 0 30px;
-  transition: 0.3s ease-in-out;
+  transition: 0.1s ease-in-out;
   cursor: pointer;
   &:hover {
     background-color: ${(props) => props.color};
