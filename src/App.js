@@ -1,5 +1,4 @@
-import { Fragment } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // store
@@ -17,7 +16,9 @@ import Markdown from './components/Markdown/Markdown';
 import Home from './components/Home/Home';
 import DocumentList from './components/DocumentList/DocumentList';
 
+// on/off components
 import SideBar from './components/SideBar/SideBar';
+import { RemoveModal } from './components/Modal/Modal';
 
 function App() {
   return (
@@ -27,12 +28,14 @@ function App() {
           <GlobalStyle />
           <Header />
           <Switch>
-            <Route exact path='/' render={() => <Home />} />
-            <Route exact path='/edit' render={() => <Markdown />} />
-            <Route exact path='/list' render={() => <DocumentList />} />
-            {/* <Markdown /> */}
+            <Fade.FadeAnimation>
+              <Route exact path='/' render={() => <Home />} />
+              <Route exact path='/edit' render={() => <Markdown />} />
+              <Route exact path='/list' render={() => <DocumentList />} />
+            </Fade.FadeAnimation>
           </Switch>
           <SideBar />
+          <RemoveModal />
         </Router>
       </ColorBoxStore>
     </MdStore>

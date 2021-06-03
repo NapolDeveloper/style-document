@@ -1,4 +1,4 @@
-import React, { createContext, useState, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 
 export const ColorBoxContext = createContext();
 
@@ -15,6 +15,10 @@ const ColorBoxStore = (props) => {
     {
       color: '#ff449f',
       id: 3
+    },
+    {
+      color: '#005f99',
+      id: 4
     }
   ];
   // const initialList = ['#00ead3', '#fff5b7', '#ff449f', '#005f99'];

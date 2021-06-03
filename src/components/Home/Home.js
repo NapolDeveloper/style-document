@@ -13,6 +13,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-top: 150px;
 `;
 
 const Title = styled.div`
@@ -36,6 +37,10 @@ const ColorBoxContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 1000px;
+  /* background-color: ${Colors.colorLightGrey}; */
 `;
 
 const ColorBoxHex = styled.div`
@@ -56,6 +61,8 @@ const ColorBoxStyle = styled.div`
   height: 150px;
   background-color: ${(props) => props.color};
   margin: 0 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
   position: relative;
   &:hover {
     &:after {
@@ -76,6 +83,7 @@ const ColorBoxStyle = styled.div`
     opacity: 0.8;
     left: 0;
     top: 0;
+    border-radius: 10px;
     background-color: ${Colors.colorBlack};
     transition: 0.3s ease-in-out;
     cursor: pointer;
@@ -86,7 +94,7 @@ const ColorBoxInputContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 100px;
 `;
 
 const ColorBoxInput = styled.input`
@@ -150,7 +158,7 @@ const Home = () => {
   );
 };
 
-export const ColorBox = (props) => {
+export const ColorBox = React.memo((props) => {
   const [showMessage, setShowMessage] = useState('Copy hex code');
 
   const handleCopy = () => {
@@ -169,14 +177,17 @@ export const ColorBox = (props) => {
       </CopyToClipboard>
     </ColorBoxStyle>
   );
-};
+});
 
-export const ColorInput = () => {
+export const ColorInput = React.memo(() => {
   const [inputValue, setInputValue] = useState('');
   const colorBoxContext = useContext(ColorBoxContext);
   const { colorBoxDispatch } = colorBoxContext;
 
   const handleAddColor = () => {
+    if (inputValue === '') {
+      return;
+    }
     let hex = inputValue.replace(/^\s+|\s+$/g, ''); // 앞, 뒤 공백제거
     hex = hex.replace(/(^ *)|( *$)/g, '').replace(/ +/g, ' '); // trim 추가
     const newArr = hex.split(' ');
@@ -195,9 +206,14 @@ export const ColorInput = () => {
   return (
     <ColorBoxInputContainer>
       <ColorBoxInput type='text' onChange={changeValue} value={inputValue} placeholder={`ex) #000 #ff449f #005f99`}></ColorBoxInput>
-      <ColorBoxSave onClick={handleAddColor}>Save</ColorBoxSave>
+      <SaveBtn onSave={handleAddColor}>Save</SaveBtn>
     </ColorBoxInputContainer>
   );
-};
+});
+
+export const SaveBtn = React.memo((props) => {
+  const { onSave } = props;
+  return <ColorBoxSave onClick={onSave}>{props.children}</ColorBoxSave>;
+});
 
 export default Home;
