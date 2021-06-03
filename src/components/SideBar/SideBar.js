@@ -105,7 +105,7 @@ const MenuTitle = styled.div`
 `;
 
 // 최종 렌더링
-const SideBar = () => {
+const SideBar = React.memo(() => {
   const mdContext = useContext(MdContext);
   const { isOpenSideBar } = mdContext;
   return (
@@ -125,7 +125,7 @@ const SideBar = () => {
       </SideBarStyle>
     </SideBarArea>
   );
-};
+});
 
 export const NoneSideAreaC = () => {
   const mdContext = useContext(MdContext);

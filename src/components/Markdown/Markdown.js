@@ -86,7 +86,7 @@ const Content = () => {
   );
 };
 
-const MdEditorBox = () => {
+const MdEditorBox = React.memo(() => {
   const mdContext = useContext(MdContext);
   const { mdValue, setMdValue, contentDispatch, title, setTitle, setIsMdOpen, isMdOpen } = mdContext;
 
@@ -126,7 +126,7 @@ const MdEditorBox = () => {
       <SaveButton onSave={handleSave}>save</SaveButton>
     </MdWrap>
   );
-};
+});
 
 const MdTitleBox = (props) => {
   return <TitleBox type='text' placeholder='タイトルを入力してください' value={props.value} onChange={props.onChange} />;

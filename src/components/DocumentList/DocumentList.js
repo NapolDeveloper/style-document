@@ -3,6 +3,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Colors from '../../style/Colors';
 
+import useToggle from '../../hooks/useToggle';
+
 // icon
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
@@ -67,6 +69,7 @@ const ListDate = styled.div`
   margin-top: 30px;
 `;
 
+// 삭제, 수정 작업시 리렌더링 방지
 const DocumentList = () => {
   return (
     <DocumentListContainer>
@@ -94,10 +97,12 @@ const ListItem = () => {
 
 export const ListItemIcon = (props) => {
   const mdContext = useContext(MdContext);
-  const { setRemoveId, setIsRemoveModal, isRemoveModal } = mdContext;
+  const { setRemoveId, setIsRemoveModal, isRemoveModal, isOpen, handleToggle } = mdContext;
 
   const onRemove = (id) => {
-    setIsRemoveModal(!isRemoveModal);
+    handleToggle(isRemoveModal);
+    console.log(`isOpen : ${isOpen}`);
+    // setIsRemoveModal(!isRemoveModal);
     setRemoveId(props.id);
   };
   return (

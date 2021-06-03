@@ -158,7 +158,7 @@ const Home = () => {
   );
 };
 
-export const ColorBox = (props) => {
+export const ColorBox = React.memo((props) => {
   const [showMessage, setShowMessage] = useState('Copy hex code');
 
   const handleCopy = () => {
@@ -177,9 +177,9 @@ export const ColorBox = (props) => {
       </CopyToClipboard>
     </ColorBoxStyle>
   );
-};
+});
 
-export const ColorInput = () => {
+export const ColorInput = React.memo(() => {
   const [inputValue, setInputValue] = useState('');
   const colorBoxContext = useContext(ColorBoxContext);
   const { colorBoxDispatch } = colorBoxContext;
@@ -206,9 +206,14 @@ export const ColorInput = () => {
   return (
     <ColorBoxInputContainer>
       <ColorBoxInput type='text' onChange={changeValue} value={inputValue} placeholder={`ex) #000 #ff449f #005f99`}></ColorBoxInput>
-      <ColorBoxSave onClick={handleAddColor}>Save</ColorBoxSave>
+      <SaveBtn onSave={handleAddColor}>Save</SaveBtn>
     </ColorBoxInputContainer>
   );
-};
+});
+
+export const SaveBtn = React.memo((props) => {
+  const { onSave } = props;
+  return <ColorBoxSave onClick={onSave}>{props.children}</ColorBoxSave>;
+});
 
 export default Home;

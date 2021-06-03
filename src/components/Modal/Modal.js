@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -56,21 +56,22 @@ const Modal = () => {
 
 export const RemoveModal = (props) => {
   const mdContext = useContext(MdContext);
-  const { isRemoveModal, setIsRemoveModal, contentDispatch, removeId } = mdContext;
+  const { isRemoveModal, setIsRemoveModal, contentDispatch, removeId, isOpen, handleToggle } = mdContext;
 
   const onRemove = () => {
-    console.log(removeId);
     contentDispatch({ type: 'REMOVE', id: removeId });
-    setIsRemoveModal(!isRemoveModal);
+    // setIsRemoveModal(!isRemoveModal);
+    handleToggle(isRemoveModal);
   };
 
   const onCancel = () => {
-    setIsRemoveModal(!isRemoveModal);
+    // setIsRemoveModal(!isRemoveModal);
+    handleToggle(isRemoveModal);
   };
 
   return (
     <div>
-      {isRemoveModal ? (
+      {isOpen ? (
         <ModalBox>
           <ModalDescription>文を削除しましょうか？</ModalDescription>
           <ModalButtonWrap>

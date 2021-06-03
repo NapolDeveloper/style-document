@@ -82,7 +82,7 @@ const EditButton = styled.button`
   }
 `;
 
-const Header = () => {
+const Header = React.memo(() => {
   return (
     <div>
       <HeaderWrap>
@@ -92,7 +92,7 @@ const Header = () => {
       </HeaderWrap>
     </div>
   );
-};
+});
 
 export const HeaderLogo = (props) => {
   return <Logo>{props.children}</Logo>;

@@ -1,8 +1,12 @@
 import React, { createContext, useReducer, useState } from 'react';
 
+import useToggle from '../hooks/useToggle';
+
 export const MdContext = createContext();
 
 const MdStore = (props) => {
+  const [isOpen, handleToggle] = useToggle();
+
   const initialList = [
     {
       id: 1,
@@ -18,7 +22,6 @@ const MdStore = (props) => {
     }
   ];
   const [contentList, contentDispatch] = useReducer(contentReducer, initialList);
-  // const [sideBar, sideBarDispatch] = useReducer(sideBarReducer, false);
   const [isMdOpen, setIsMdOpen] = useState(false); // editor on/off 여부
   const [mdValue, setMdValue] = useState(''); // editor content value
   const [title, setTitle] = useState(''); // editor title value
@@ -26,9 +29,6 @@ const MdStore = (props) => {
   const [isRemoveModal, setIsRemoveModal] = useState(false);
 
   const [removeId, setRemoveId] = useState();
-
-  // ref
-  // const mdInputRef = useRef();
 
   function contentReducer(state, action) {
     switch (action.type) {
@@ -65,7 +65,10 @@ const MdStore = (props) => {
     isRemoveModal, // remove modal
     setIsRemoveModal,
     removeId,
-    setRemoveId
+    setRemoveId,
+    // toggle
+    isOpen,
+    handleToggle
   };
   return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;
 };
