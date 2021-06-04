@@ -15,6 +15,7 @@ import Header from './components/Header/Header';
 import Markdown from './components/Markdown/Markdown';
 import Home from './components/Home/Home';
 import DocumentList from './components/DocumentList/DocumentList';
+import ContentView from './components/ContentView/ContentView';
 
 // on/off components
 import SideBar from './components/SideBar/SideBar';
@@ -31,7 +32,8 @@ function App() {
             <Fade.FadeAnimation>
               <Route exact path='/' render={() => <Home />} />
               <Route exact path='/edit' render={() => <Markdown />} />
-              <Route exact path='/list' render={() => <DocumentList />} />
+              <Route exact path='/content-list' render={() => <DocumentList />} />
+              <Route exact path='/content-view' render={() => <ContentView />}></Route>
             </Fade.FadeAnimation>
           </Switch>
           <SideBar />

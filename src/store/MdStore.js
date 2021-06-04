@@ -10,14 +10,30 @@ const MdStore = (props) => {
   const initialList = [
     {
       id: 1,
-      title: 'React Hooks 배워보기',
-      data: 'index 1',
+      title: 'React - useReducer',
+      data: `Just a link: https://reactjs.com. A paragraph with *emphasis* and **strong importance**.
+
+      > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+      
+      * Lists
+      * [ ] todo
+      * [x] done
+      
+      A table:
+      
+      | a | b |
+      | - | - |`,
       date: '2021년 5월 30일'
     },
     {
       id: 2,
       title: 'Svelte는 언제배우지...',
-      data: 'index 2',
+      data: `Here is some JavaScript code:
+
+      ~~~js
+      console.log('It works!')
+      ~~~
+      `,
       date: '2021년 6월 1일'
     }
   ];
@@ -27,6 +43,10 @@ const MdStore = (props) => {
   const [title, setTitle] = useState(''); // editor title value
   const [isOpenSideBar, setIsOpenSideBar] = useState(false); // content list on/off 여부
   const [isRemoveModal, setIsRemoveModal] = useState(false);
+
+  // List 클릭시 렌더링 되는 데이터 -> 후에 따로 store 만들어주기
+  const [renderingMd, setRenderingMd] = useState(``);
+  const [renderingTitle, setRenderingTitle] = useState('');
 
   const [removeId, setRemoveId] = useState();
 
@@ -68,7 +88,12 @@ const MdStore = (props) => {
     setRemoveId,
     // toggle
     isOpen,
-    handleToggle
+    handleToggle,
+    // rendering markdown data
+    renderingMd,
+    setRenderingMd,
+    renderingTitle,
+    setRenderingTitle
   };
   return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;
 };

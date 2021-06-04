@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 
 import styled from 'styled-components';
 import Colors from '../../style/Colors';
-
-import useToggle from '../../hooks/useToggle';
+import { Link } from 'react-router-dom';
 
 // icon
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
@@ -64,6 +63,10 @@ const ListBox = styled.div`
 `;
 const ListTitle = styled.div`
   font-size: 24px;
+  color: ${Colors.colorBlack};
+  &:hover {
+    color: ${Colors.colorHoverBlue};
+  }
 `;
 const ListDate = styled.div`
   margin-top: 30px;
@@ -80,13 +83,21 @@ const DocumentList = () => {
 
 const ListItem = () => {
   const mdContext = useContext(MdContext);
-  const { contentList } = mdContext;
+  const { contentList, setRenderingMd, setRenderingTitle } = mdContext;
+
+  const handleSetData = (item) => {
+    setRenderingMd(item.data);
+    setRenderingTitle(item.title);
+    console.log(item.data);
+  };
 
   return (
     <div>
       {contentList.map((item) => (
         <ListBox key={item.id}>
-          <ListTitle>{item.title}</ListTitle>
+          <Link to='/content-view'>
+            <ListTitle onClick={() => handleSetData(item)}>{item.title}</ListTitle>
+          </Link>
           <ListDate>{item.date}</ListDate>
           <ListItemIcon id={item.id} />
         </ListBox>
@@ -97,7 +108,7 @@ const ListItem = () => {
 
 export const ListItemIcon = (props) => {
   const mdContext = useContext(MdContext);
-  const { setRemoveId, setIsRemoveModal, isRemoveModal, isOpen, handleToggle } = mdContext;
+  const { setRemoveId, isRemoveModal, isOpen, handleToggle } = mdContext;
 
   const onRemove = (id) => {
     handleToggle(isRemoveModal);

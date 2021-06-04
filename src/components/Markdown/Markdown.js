@@ -91,8 +91,10 @@ const MdEditorBox = React.memo(() => {
   const { mdValue, setMdValue, contentDispatch, title, setTitle, setIsMdOpen, isMdOpen } = mdContext;
 
   const handleEditorChange = ({ html, text }) => {
-    const newValue = text.replace(/\d/g, '');
-    setMdValue(newValue);
+    // const newValue = text.replace(/\d/g, '');
+    // const newValue = text;
+    console.log('handleEditorChange', `html: ${html}`, text);
+    setMdValue(text);
   };
 
   const handleTitleChange = (e) => {
