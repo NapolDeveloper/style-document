@@ -38,15 +38,21 @@ const MdStore = (props) => {
     }
   ];
   const [contentList, contentDispatch] = useReducer(contentReducer, initialList);
+
+  // current markdown data
   const [isMdOpen, setIsMdOpen] = useState(false); // editor on/off 여부
   const [mdValue, setMdValue] = useState(''); // editor content value
   const [title, setTitle] = useState(''); // editor title value
+
+  // on/off
   const [isOpenSideBar, setIsOpenSideBar] = useState(false); // content list on/off 여부
   const [isRemoveModal, setIsRemoveModal] = useState(false);
+  const [onEdit, setOnEdit] = useState(false);
 
   // List 클릭시 렌더링 되는 데이터 -> 후에 따로 store 만들어주기
   const [renderingMd, setRenderingMd] = useState(``);
   const [renderingTitle, setRenderingTitle] = useState('');
+  const [renderingId, setRenderingId] = useState('');
 
   const [removeId, setRemoveId] = useState();
 
@@ -57,7 +63,7 @@ const MdStore = (props) => {
       case 'SAVE':
         return state.concat(action.list);
 
-      case 'OPEN': {
+      case 'EDIT': {
         // console.log('test');
         return;
       }
@@ -89,11 +95,15 @@ const MdStore = (props) => {
     // toggle
     isOpen,
     handleToggle,
+    onEdit,
+    setOnEdit,
     // rendering markdown data
     renderingMd,
     setRenderingMd,
     renderingTitle,
-    setRenderingTitle
+    setRenderingTitle,
+    renderingId,
+    setRenderingId
   };
   return <MdContext.Provider value={mdManager}>{props.children}</MdContext.Provider>;
 };

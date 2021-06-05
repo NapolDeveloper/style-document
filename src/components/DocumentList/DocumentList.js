@@ -28,6 +28,7 @@ const IconBox = styled.div`
 const IconItem = styled.div`
   transition: 0.1s ease-in-out;
   margin-bottom: 10px;
+  /* color: ${Colors.colorBlack}; */
   &:hover {
     color: ${Colors.colorBlue};
   }
@@ -64,6 +65,7 @@ const ListBox = styled.div`
 const ListTitle = styled.div`
   font-size: 24px;
   color: ${Colors.colorBlack};
+  transition: 0.1s ease-in-out;
   &:hover {
     color: ${Colors.colorHoverBlue};
   }
@@ -99,7 +101,7 @@ const ListItem = () => {
             <ListTitle onClick={() => handleSetData(item)}>{item.title}</ListTitle>
           </Link>
           <ListDate>{item.date}</ListDate>
-          <ListItemIcon id={item.id} />
+          <ListItemIcon item={item} />
         </ListBox>
       ))}
     </div>
@@ -108,7 +110,7 @@ const ListItem = () => {
 
 export const ListItemIcon = (props) => {
   const mdContext = useContext(MdContext);
-  const { setRemoveId, isRemoveModal, isOpen, handleToggle } = mdContext;
+  const { setRemoveId, isRemoveModal, isOpen, handleToggle, setMdValue, setTitle, setIsMdOpen, onEdit, setOnEdit, setRenderingId } = mdContext;
 
   const onRemove = (id) => {
     handleToggle(isRemoveModal);
@@ -116,13 +118,23 @@ export const ListItemIcon = (props) => {
     // setIsRemoveModal(!isRemoveModal);
     setRemoveId(props.id);
   };
+
+  const handleEdit = (item) => {
+    setOnEdit(true);
+    setIsMdOpen(true);
+    setMdValue(item.data);
+    setTitle(item.title);
+    setRenderingId(item.id);
+  };
   return (
     <IconBox>
       <IconItem>
-        <FaEdit />
+        <Link to='/edit'>
+          <FaEdit onClick={() => handleEdit(props.item)} />
+        </Link>
       </IconItem>
       <IconItem>
-        <FaTrashAlt onClick={() => onRemove(props.id)} />
+        <FaTrashAlt onClick={() => onRemove(props.item.id)} />
       </IconItem>
     </IconBox>
   );
