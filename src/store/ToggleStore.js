@@ -1,5 +1,7 @@
 import React, { createContext } from 'react';
 
-export const toggleContext = createContext();
+export const ToggleContext = createContext();
 
-const ToggleStore = (props) => {};
+const ToggleStore = (props) => {
+  return <ToggleContext.Provider>{props.children}</ToggleContext.Provider>;
+};
