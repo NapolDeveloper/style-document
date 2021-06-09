@@ -64,6 +64,7 @@ const ListBox = styled.div`
 `;
 const ListTitle = styled.div`
   font-size: 24px;
+  font-weight: 400;
   color: ${Colors.colorBlack};
   transition: 0.1s ease-in-out;
   &:hover {
