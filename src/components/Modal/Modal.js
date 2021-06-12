@@ -6,6 +6,7 @@ import Colors from '../../style/Colors';
 
 // store
 import { MdContext } from '../../store/MdStore';
+import { ToggleContext } from '../../store/ToggleStore';
 
 // Modal
 const ModalBox = styled.div`

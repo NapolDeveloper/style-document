@@ -88,11 +88,13 @@ const Content = () => {
 
 const MdEditorBox = React.memo(() => {
   const mdContext = useContext(MdContext);
-  const { mdValue, setMdValue, contentDispatch, title, setTitle, setIsMdOpen, isMdOpen } = mdContext;
+  const { mdValue, setMdValue, contentDispatch, title, setTitle, setIsMdOpen, isMdOpen, onEdit, setOnEdit } = mdContext;
 
   const handleEditorChange = ({ html, text }) => {
-    const newValue = text.replace(/\d/g, '');
-    setMdValue(newValue);
+    // const newValue = text.replace(/\d/g, '');
+    // const newValue = text;
+    console.log('handleEditorChange', `html: ${html}`, text);
+    setMdValue(text);
   };
 
   const handleTitleChange = (e) => {
@@ -119,11 +121,30 @@ const MdEditorBox = React.memo(() => {
     contentDispatch({ type: 'SAVE', list: newList });
   };
 
+  // const makeDate = () => {
+  //   const currentDate = new Date();
+  //   const year = currentDate.getFullYear();
+  //   const month = currentDate.getMonth();
+  //   const day = currentDate.getDate();
+
+  //   return {year, month, day};
+  // }
+
+  const handleEdit = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const day = currentDate.getDate();
+
+    const newList = { id: mdContext.renderingId, title, data: mdValue, date: `${year}년 ${month + 1}월 ${day}일` };
+    contentDispatch({ type: 'EDIT', list: newList });
+  };
   return (
     <MdWrap>
       <MdTitleBox value={title} onChange={handleTitleChange} />
       <MdEditor style={{ height: '500px' }} value={mdValue} renderHTML={(text) => mdParser.render(text)} onChange={handleEditorChange} />
-      <SaveButton onSave={handleSave}>save</SaveButton>
+      {onEdit ? null : <SaveButton onSave={handleSave}>save</SaveButton>}
+      {onEdit ? <SaveButton onEdit={handleEdit}>edit</SaveButton> : null}
     </MdWrap>
   );
 });

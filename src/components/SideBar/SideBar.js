@@ -119,7 +119,7 @@ const SideBar = React.memo(() => {
         <Link to={'/edit'}>
           <NavMenu icon={<FaPen />}>Make New</NavMenu>
         </Link>
-        <Link to={'/list'}>
+        <Link to={'/content-list'}>
           <NavMenu icon={<FaListAlt />}>List</NavMenu>
         </Link>
       </SideBarStyle>
