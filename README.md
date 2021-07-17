@@ -12,7 +12,7 @@ context api 를 이용하여 전역에서 상태관리 하는 방법을 배우�
 - react-markdown
 - react-router-dom
 
-### image
+### Image
 
 ---
 
